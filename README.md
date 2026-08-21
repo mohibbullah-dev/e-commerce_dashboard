@@ -1,16 +1,32 @@
-# React + Vite
+# Multi-Vendor E-commerce Dashboard 🛒
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the Admin and Seller Dashboard for a complete Multi-Vendor E-commerce platform. It provides a comprehensive interface for managing products, categories, orders, sellers, and customer live chats.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[Live Demo Link Here] (Add the link once the project is deployed)
 
-## React Compiler
+## 🛠️ Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Frontend:** React.js
+- **Build Tool:** Vite (Chosen for extremely fast HMR and optimized builds)
+- **Styling:** Tailwind CSS
 
-## Expanding the ESLint configuration
+## ✨ Key Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Secure Admin and Seller authentication system.
+- Real-time dashboard analytics and sales charts.
+- Vendor management (approve/deactivate sellers).
+- Product and Category management.
+- Order tracking and payment request handling.
+
+## 📝 Developer Notes & Migration
+
+This project was strategically migrated from Create React App (CRA) to **Vite** for better performance and modern industry standards.
+You can find my detailed architectural decisions, setup guides, and learning logs in the `notes/` directory of this repository.
+
+## 💻 How to Run Locally
+
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Start the development server: `npm run dev`

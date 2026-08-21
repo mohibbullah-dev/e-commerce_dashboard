@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 const Register = () => {
+  const [state, setState] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const inpurHandler = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    console.log(state);
+  };
+
   return (
     <div className="min-w-screen min-h-screen bg-[#cdcae9] flex justify-center items-center">
       <div className="w-[350px] text-white p-2">
@@ -12,11 +30,13 @@ const Register = () => {
             Please register your account
           </p>
 
-          <form>
+          <form onSubmit={submitForm}>
             <div className="flex flex-col w-full gap-1 mb-3">
               <label htmlFor="name">name</label>
               <input
                 className="px-3 py-2 outline-none border border-slate-700 bg-transparent rounded-md"
+                onChange={inpurHandler}
+                value={state.name}
                 type="text"
                 name="name"
                 id=""
@@ -29,6 +49,8 @@ const Register = () => {
               <label htmlFor="email">email</label>
               <input
                 className="px-3 py-2 outline-none border border-slate-700 bg-transparent rounded-md"
+                onChange={inpurHandler}
+                value={state.email}
                 type="email"
                 name="email"
                 id="email"
@@ -41,6 +63,8 @@ const Register = () => {
               <label htmlFor="password">password</label>
               <input
                 className="px-3 py-2 outline-none border border-slate-700/50 bg-transparent rounded-md"
+                onChange={inpurHandler}
+                value={state.password}
                 type="password"
                 name="password"
                 id="password"

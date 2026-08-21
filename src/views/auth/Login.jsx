@@ -1,7 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 const Login = () => {
+  const [state, setState] = useState({
+    email: "",
+    password: "",
+  });
+
+  const inputHandler = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const formSubmit = (e) => {
+    e.preventDefault();
+    console.log(state);
+  };
+
   return (
     <div className="min-w-screen min-h-screen bg-[#cdcae9] flex justify-center items-center">
       <div className="w-[350px] text-white p-2">
@@ -12,11 +29,13 @@ const Login = () => {
             Please Sign In your account
           </p>
 
-          <form>
+          <form onSubmit={formSubmit}>
             <div className="flex flex-col w-full gap-1 mb-3">
               <label htmlFor="email">email</label>
               <input
                 className="px-3 py-2 outline-none border border-slate-700 bg-transparent rounded-md"
+                onChange={inputHandler}
+                value={state.email}
                 type="email"
                 name="email"
                 id="email"
@@ -29,6 +48,8 @@ const Login = () => {
               <label htmlFor="password">password</label>
               <input
                 className="px-3 py-2 outline-none border border-slate-700/50 bg-transparent rounded-md"
+                onChange={inputHandler}
+                value={state.password}
                 type="password"
                 name="password"
                 id="password"

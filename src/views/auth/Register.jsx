@@ -68,7 +68,7 @@ const Register = () => {
               <p>
                 Already Have an account ?
                 <Link
-                  className="font-bold hover:underline hover:text-blue-400"
+                  className="font-bold ml-1 hover:underline hover:text-blue-400"
                   to="/login"
                 >
                   Sing In

@@ -1,9 +1,18 @@
-import { useRoutes } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import MainLayout from "../Layout/MainLayout";
+import SideBar from "../Layout/SideBar";
+import publicRoutes from "./routes/PublicRoutes";
 
-const Router = ({ allRoutes }) => {
-  const router = useRoutes([...allRoutes]);
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    children: [...publicRoutes],
+  },
+]);
 
-  return router;
+const Router = () => {
+  return <RouterProvider router={router} />;
 };
 
 export default Router;

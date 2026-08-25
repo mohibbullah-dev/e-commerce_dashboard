@@ -5,9 +5,7 @@ export const admin_login = createAsyncThunk(
   "/auth/admin_login",
   async (info, { rejectWithValue }) => {
     try {
-      const { data } = await api.post("/auth/admin_login", info, {
-        withCredentials: true,
-      });
+      const { data } = await api.post("/auth/admin_login", info);
       console.log(data);
       return data;
     } catch (error) {

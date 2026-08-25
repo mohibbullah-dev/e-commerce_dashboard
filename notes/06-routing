@@ -1,0 +1,18 @@
+# routing
+- i have use `Route Config Pattern`
+
+``` javascript
+const route creatBroserRouter([{}])
+
+const Router =()=>{
+    return <RouterProvider router = {router}>
+}
+export default Router;
+```
+ for this project. as we know there are 2 popular pattern `Component-Based patter`
+ ``` javascript 
+<BrowserRouter>
+<BrowserRouter/>
+
+<Route element="{<Login" path="/login"/>} />
+ ```

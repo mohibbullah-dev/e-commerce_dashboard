@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { admin_login, messageClear } from "../../store/reducers/authSlice";
+import { messageClear, seller_login } from "../../store/reducers/authSlice";
 import toast from "react-hot-toast";
 import { BeatLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
 
-const AdminLogin = () => {
+const SellerLogin = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { successMessage, errorMessage, loader, userInfo } = useSelector(
@@ -27,7 +27,7 @@ const AdminLogin = () => {
 
   const formSubmit = (e) => {
     e.preventDefault();
-    dispatch(admin_login(state));
+    dispatch(seller_login(state));
   };
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const AdminLogin = () => {
     if (successMessage) {
       toast.success(successMessage);
       dispatch(messageClear());
-      navigate("/admin/dashboard");
+      navigate("/seller/dashboard");
     }
   }, [successMessage, errorMessage]);
 
@@ -47,7 +47,7 @@ const AdminLogin = () => {
       <div className="w-[350px] text-white p-2">
         <div className="bg-[#6f68d1] p-4 rounded-md">
           <h2 className="text-xl mb-3 font-bold">Welcome to E-commerce</h2>
-          <p className="text-sm mb-3 font-medium">Please Sign In as admin</p>
+          <p className="text-sm mb-3 font-medium">Please Sign In as a seller</p>
 
           <form onSubmit={formSubmit}>
             <div className="flex flex-col w-full gap-1 mb-3">
@@ -99,4 +99,4 @@ const AdminLogin = () => {
   );
 };
 
-export default AdminLogin;
+export default SellerLogin;

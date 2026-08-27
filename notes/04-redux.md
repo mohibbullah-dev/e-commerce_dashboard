@@ -30,3 +30,7 @@ export const admin_login = createAsyncThunk(
   },
 );
 ```
+
+
+## extraReducers
+- used `extraReducers` in api handing for adminLogin.

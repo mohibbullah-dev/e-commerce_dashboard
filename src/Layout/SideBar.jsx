@@ -4,12 +4,15 @@ import { useSelector } from "react-redux";
 import { AllNav } from "../navigation/NavConfig";
 import { NavLink } from "react-router-dom";
 
-const SideBar = () => {
+const SideBar = ({ isSidebarOpen, setIsSiderbarOpen }) => {
   const { userInfo } = useSelector((state) => state.auth);
   const allNavs = AllNav.filter((nav) => nav.role === userInfo?.role);
   console.log("allnavs :", allNavs);
   return (
-    <div className="w-[260px] min-h-screen bg-gray-200 text-white p-4">
+    <div
+      className={`w-[260px] fixed z-50 h-screen bg-gray-700 transition-transform duration-300 
+      lg:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+    >
       <div className="flex justify-center">
         <img className="h-[100px] text-center" src={logo} alt="logo" />
       </div>
@@ -18,7 +21,7 @@ const SideBar = () => {
         {allNavs.map((n, id) => {
           return (
             <li
-              className={` hover:bg-gray-50 rounded-md p-2 mt-2 text-black`}
+              className={` hover:bg-gray-600 m-2 hover:text-black rounded-md p-2 mt-2 text-black text-white`}
               key={id}
             >
               <NavLink

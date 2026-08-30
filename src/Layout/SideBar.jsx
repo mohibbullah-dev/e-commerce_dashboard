@@ -21,7 +21,7 @@ const SideBar = ({ isSidebarOpen, setIsSiderbarOpen }) => {
         {allNavs.map((n, id) => {
           return (
             <li
-              className={` hover:bg-gray-600 m-2 hover:text-black rounded-md p-2 mt-2 text-black text-white`}
+              className={` hover:bg-gray-600 m-2 hover:text-gray-400 rounded-md p-2 mt-2 text-black text-white`}
               key={id}
             >
               <NavLink

@@ -11,7 +11,7 @@ const SideBar = ({ isSidebarOpen, setIsSiderbarOpen }) => {
   return (
     <div
       className={`w-[260px] fixed z-50 h-screen bg-gray-700 transition-transform duration-300 
-      lg:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
+      md:translate-x-0 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}
     >
       <div className="flex justify-center">
         <img className="h-[100px] text-center" src={logo} alt="logo" />

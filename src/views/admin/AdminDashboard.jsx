@@ -154,7 +154,7 @@ const AdminDashboard = () => {
             </Link>
           </div>
           <div className=" flex flex-col gap-2 pt-6 text-white">
-            <ol className="relative border-slate-600 ml-4">
+            <ol className="relative border-slate-600/40 ml-4">
               <li className="mb-3 ml-6">
                 <div className="flex absolute -left-5 shadow-lg justify-center items-center w-10 h-10 p-[6px] z-10 bg-blue-400 rounded-full">
                   <img

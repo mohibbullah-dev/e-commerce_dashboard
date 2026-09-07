@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { RiArrowLeftDoubleFill } from "react-icons/ri";
 import { RiArrowRightDoubleLine } from "react-icons/ri";
 import { RiArrowDropLeftLine } from "react-icons/ri";
@@ -8,15 +8,23 @@ const Paginations = ({
   totalItems,
   itemPerPage,
   onPageChange,
-  windowSize = 7,
 }) => {
   const totalPages = Math.ceil(totalItems / itemPerPage);
 
-  console.log("totalPages ", totalPages);
-  console.log("currentPage ", currentPage);
-  console.log("itemPerPage ", itemPerPage);
-  console.log("onPageChange ", onPageChange);
-  console.log("windowSize ", windowSize);
+  const [windowSize, setWindowSize] = useState(7);
+  useEffect(() => {
+    const resizeHandler = () => {
+      if (window.innerWidth < 640) {
+        setWindowSize(5);
+      } else {
+        setWindowSize(7);
+      }
+    };
+
+    resizeHandler();
+    window.addEventListener("resize", resizeHandler);
+    return () => window.removeEventListener("resize", resizeHandler);
+  }, []);
 
   if (totalPages <= 1) return null;
 

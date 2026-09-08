@@ -1,7 +1,6 @@
 import { lazy } from "react";
-import SellerLogin from "../../views/auth/SellerLogin";
-import Unauthorize from "../../views/auth/Unauthorize";
-
+const SellerLogin = lazy(() => import("../../views/auth/SellerLogin"));
+const Unauthorize = lazy(() => import("../../views/auth/Unauthorize"));
 const Login = lazy(() => import("../../views/auth/Login"));
 const Register = lazy(() => import("../../views/auth/Register"));
 const AdminLogin = lazy(() => import("../../views/auth/AdminLogin"));

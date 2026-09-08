@@ -20,7 +20,7 @@ const MainLayout = () => {
           setIsSiderbarOpen={setIsSiderbarOpen}
         />
       </div>
-      <div className="w-full md:w-[calc(100% - 260px)] md:ml-[260px] lg:flex-1 flex-col justify-between items-center">
+      <div className="sticky top-0 w-full md:w-[calc(100% - 260px)] md:ml-[260px] lg:flex-1 flex-col justify-between items-center">
         <Header
           isSidebarOpen={isSidebarOpen}
           setIsSiderbarOpen={setIsSiderbarOpen}

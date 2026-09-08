@@ -33,7 +33,7 @@ export const AllNav = [
   {
     id: 4,
     title: "Sellers",
-    path: "/admin/serler",
+    path: "/admin/seller",
     icon: <MdSpaceDashboard />,
     role: "admin",
   },

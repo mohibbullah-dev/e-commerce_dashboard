@@ -1,4 +1,7 @@
-import SellerDashaoard from "../../views/seller/SellerDashaoard";
+import { lazy } from "react";
+const SellerDashaoard = lazy(
+  () => import("../../views/seller/SellerDashaoard"),
+);
 
 const SellerRoutes = [
   { path: "/seller/dashboard", element: <SellerDashaoard /> },

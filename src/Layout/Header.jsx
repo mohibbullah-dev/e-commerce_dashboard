@@ -10,7 +10,7 @@ const Header = ({ isSidebarOpen, setIsSiderbarOpen }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   return (
-    <div className="">
+    <div className="sticky top-0">
       <div className="flex justify-between items-center bg-gray-500 h-[80px] m-2 rounded-md">
         <div className="flex items-center">
           <CgMenuOreos

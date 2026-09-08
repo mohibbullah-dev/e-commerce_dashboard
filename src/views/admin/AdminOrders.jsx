@@ -7,12 +7,11 @@ import Paginations from "../components/Paginations";
 const AdminOrders = () => {
   const [sub_order_show, setSub_order_show] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const windowSize = 7;
   const totalItems = 2000;
   const itemPerPage = 10;
 
   return (
-    <div className="px-2 lg:px-7 pt-5">
+    <div className="p-2 m-2 bg-gray-100 flex flex-col inset-0 rounded-sm">
       <div className="w-full p-4 bg-gray-500 rounded-md">
         <div className="flex justify-between items-center">
           <select
@@ -133,7 +132,6 @@ const AdminOrders = () => {
         <Paginations
           currentPage={currentPage}
           onPageChange={setCurrentPage}
-          windowSize={windowSize}
           totalItems={totalItems}
           itemPerPage={itemPerPage}
         />

@@ -2,9 +2,12 @@ import React from "react";
 
 const SellerDetail = () => {
   return (
-    <div className="px-2 lg:px-7 pt-5">
-      <h1 className="text-[20px] font-bold mb-3"> Seller Details </h1>
+    <div className="px-2 lg:px-4 pt-5">
       <div className="w-full p-4 bg-gray-700 rounded-md">
+        <h1 className="text-[20px] font-bold mb-3 text-white">
+          {" "}
+          Seller Details{" "}
+        </h1>
         <div className="w-full flex flex-wrap text-[#d0d2d6]">
           <div className="w-full lg:w-3/12  flex justify-center items-center py-3">
             <div>

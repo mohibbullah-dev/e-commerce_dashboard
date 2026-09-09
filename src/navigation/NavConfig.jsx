@@ -68,7 +68,7 @@ export const AllNav = [
   {
     id: 9,
     title: "Live Chat",
-    path: "/admin/live_chat",
+    path: "/admin/seller_chat",
     icon: <IoMdChatboxes />,
     role: "admin",
   },

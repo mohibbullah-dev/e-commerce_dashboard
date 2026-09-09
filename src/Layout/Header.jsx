@@ -10,7 +10,7 @@ const Header = ({ isSidebarOpen, setIsSiderbarOpen }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   return (
-    <div className="sticky top-0">
+    <div className="sticky top-0 z-50">
       <div className="flex justify-between items-center bg-gray-500 h-[80px] m-2 rounded-md">
         <div className="flex items-center">
           <CgMenuOreos
@@ -19,7 +19,6 @@ const Header = ({ isSidebarOpen, setIsSiderbarOpen }) => {
             size={24}
           />
           <div className="flex h-[40px] w-full max-w-[384px]  mx-4 rounded-md">
-            {/* <IoIosSearch size={24} /> */}
             <input
               className="outline-none w-full focus:border-sky-400 placeholder-teal-600 bg-white focus:right-2 focus:ring-emerald-700 border border-mauve-600 rounded-md px-2"
               placeholder="Search..."
@@ -47,7 +46,7 @@ const Header = ({ isSidebarOpen, setIsSiderbarOpen }) => {
               />
             </div>
             {isProfileOpen && (
-              <div className="absolute md:hidden items-center rounded-b-md -translate-y-2 top-[70px] right-0 w-[150px] bg-gray-500 shadow-sm px-2 py-2 transition-all">
+              <div className="absolute md:hidden z-50  items-center rounded-b-md -translate-y-2 top-[70px] right-0 w-[150px] bg-gray-500 shadow-sm px-2 py-2 transition-all ">
                 <div>
                   <p className="text-white font-bold text-md">MD.Mohibbullah</p>{" "}
                   <p className="text-gray-200 font-semibold text-sm">admin</p>

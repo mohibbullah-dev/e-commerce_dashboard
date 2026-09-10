@@ -1,13 +1,11 @@
 import React, { forwardRef } from "react";
 import { List } from "react-window";
+import VirtualList from "../components/VirtualList/VirtualList";
+import PaymentRequestRow from "../components/virtualRows/PaymentRequestRow";
 
 const handleOnwheel = ({ deltaY }) => {
   console.log("handleOnwheel", deltaY);
 };
-
-const outerElementType = forwardRef((props, ref) => (
-  <div ref={ref} onWheel={handleOnwheel} {...props} />
-));
 
 const PaymentRequest = () => {
   const Row = ({ index, style }) => {
@@ -48,15 +46,12 @@ const PaymentRequest = () => {
         </div>
 
         {
-          <List
+          <VirtualList
             style={{ minWidth: "340px", height: "700px" }}
-            className="List"
-            rowComponent={Row}
-            rowCount={10000}
-            height={350}
+            rowComponent={PaymentRequestRow}
+            rowCount={1000}
             rowHeight={40}
             rowProps={{}}
-            outerElementType={outerElementType}
           />
         }
       </div>

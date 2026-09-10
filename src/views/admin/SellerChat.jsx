@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdMoreVert } from "react-icons/md";
 import { CiSearch } from "react-icons/ci";
 import { conversations, messages } from "../../utils/data";
@@ -16,6 +16,9 @@ import { FaStore } from "react-icons/fa6";
 import { GoPaperclip } from "react-icons/go";
 import { IoMdSend } from "react-icons/io";
 import { MdOutlineMoodBad } from "react-icons/md";
+import VirtualList from "../components/VirtualList/VirtualList";
+import SellerChatConversationRow from "../components/virtualRows/SellerChatConversationRow";
+import MessageRow from "../components/virtualRows/MessageRow";
 
 const SellerChat = () => {
   const [selectedSeller, setSelectedSeller] = useState(conversations[0]);
@@ -30,6 +33,22 @@ const SellerChat = () => {
       setShowSellerInfo(false);
     }
   };
+
+  useEffect(() => {
+    function resizeHandler() {
+      if (window.innerWidth < 1024) {
+        setShowSellerList(false);
+        setShowSellerInfo(false);
+      } else {
+        setShowSellerList(true);
+        setShowSellerInfo(true);
+      }
+    }
+
+    window.addEventListener("resize", resizeHandler);
+
+    return () => window.removeEventListener("resize", resizeHandler);
+  }, []);
 
   const letterAvaterGenerator = (name) => {
     return name
@@ -87,51 +106,13 @@ const SellerChat = () => {
 
           {/* conversation list start  */}
 
-          <div className="flex flex-col overflow-y-auto">
-            {conversations.map((seller, i) => {
-              const isAcitve = selectedSeller.id === seller.id;
-              return (
-                <button
-                  onClick={() => handleSellerSelect(seller)}
-                  key={i}
-                  className={`${isAcitve ? "bg-slate-100" : "hover:bg-slate-50"} transition cursor-pointer flex item-center w-full border-b border-slate-200 p-4 gap-2`}
-                >
-                  <div className="relative shrink-0">
-                    <img
-                      className="w-11 h-11"
-                      src="http://localhost:5173/src/assets/profile_placeholder.png"
-                      alt=""
-                    />
-                    {seller.online && (
-                      <span className="absolute bottom-0 right-0 w-3 h-3 border-2 object-cover border-white rounded-full bg-emerald-500" />
-                    )}
-                  </div>
-                  <div className="flex flex-1 flex-col justify-around">
-                    <div className=" flex items-center justify-between">
-                      <h2 className="text-md font-semibold text-slate-900 truncate">
-                        {seller.storeName}
-                      </h2>
-                      <p className="text-xs text-slate-500 shrink-0">
-                        {seller.time}
-                      </p>{" "}
-                    </div>
-
-                    <div className="flex item-center justify-between">
-                      {" "}
-                      <p className="text-xs text-slate-500 truncate">
-                        {seller.lastMessage}
-                      </p>
-                      {seller.unread > 0 && (
-                        <span className="w-5 h-5 bg-slate-900 flex items-center justify-center rounded-full text-[10px] font-semibold text-white">
-                          {seller.unread}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
+          <VirtualList
+            style={{ minWidth: "340px", height: "700px" }}
+            rowComponent={SellerChatConversationRow}
+            rowCount={conversations.length}
+            rowHeight={80}
+            rowProps={{ conversations, handleSellerSelect, selectedSeller }}
+          />
         </aside>
 
         {/* center chat pannel  */}
@@ -195,38 +176,24 @@ const SellerChat = () => {
 
           {/* Message Area */}
 
-          <div className="flex flex-col w-full h-full px-x py-5 bg-slate-50 px-4 space-y-2">
+          <div className="flex flex-1 flex-col w-full max-h-[80vh] overflow-y-hidden lg:h-[70vh]  py-5 bg-slate-50 px-1 md:px-3 lg:px-4 space-y-2">
             <div className="flex items-center justify-center ">
               <p className="text-slate-700 text-xs font-semibold bg-white py-1.5 px-2 rounded-2xl border-2 border-slate-100">
                 Today
               </p>
             </div>
 
-            {messages.map((message, i) => {
-              const isAdmin = message.sender === "admin";
-              return (
-                <div
-                  key={message.id}
-                  className={`flex ${isAdmin ? "justify-end" : "justify-start"}`}
-                >
-                  <div
-                    className={`flex max-w-[82%] sm:max-w-[65%] ${isAdmin ? "items-end" : "items-start"}`}
-                  >
-                    <div
-                      className={`rounded-2xl px-4 py-3 leading-relaxed text-sm shadow-sm ${isAdmin ? "rounded-bl-md bg-slate-900 text-white" : "rounded-br-md border border-slate-200 bg-white text-slate-700"}`}
-                    >
-                      {" "}
-                      {message.text}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+            <VirtualList
+              rowComponent={MessageRow}
+              rowCount={messages.length}
+              rowHeight={100}
+              rowProps={{ messages }}
+            />
           </div>
 
           {/* Message Composer  */}
 
-          <div className="flex items-center justify-between mx-auto w-full gap-2 mb-4 px-3 ">
+          <div className="flex items-center justify-between mx-auto w-full gap-2  lg:mb-4 px-3 pb-4 sticky z-50">
             <span className=" flex items-center p-3 justify-center hover:bg-slate-200 transition-all rounded-2xl w-[50px] text-slate-500 cursor-pointer">
               <GoPaperclip size={19} />
             </span>

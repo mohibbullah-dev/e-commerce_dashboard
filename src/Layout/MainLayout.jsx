@@ -20,12 +20,12 @@ const MainLayout = () => {
           setIsSiderbarOpen={setIsSiderbarOpen}
         />
       </div>
-      <div className="sticky top-0 w-full md:w-[calc(100% - 260px)] md:ml-[260px] lg:flex-1 flex-col justify-between items-center">
+      <div className=" w-full md:w-[calc(100% - 260px)] md:ml-[260px] lg:flex-1 flex-col justify-between items-center h-screen">
         <Header
           isSidebarOpen={isSidebarOpen}
           setIsSiderbarOpen={setIsSiderbarOpen}
         />
-        <main className="h-screen">{<Outlet />}</main>
+        <main className="flex-1 overflow-y-auto">{<Outlet />}</main>
       </div>
     </div>
   );

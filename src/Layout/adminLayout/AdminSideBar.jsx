@@ -1,10 +1,11 @@
 import React from "react";
-import logo from "../assets/logo.png";
+import logo from "../../assets/logo.png";
 import { useSelector } from "react-redux";
-import { AllNav } from "../navigation/NavConfig";
-import { NavLink } from "react-router-dom";
 
-const SideBar = ({ isSidebarOpen, setIsSiderbarOpen }) => {
+import { NavLink } from "react-router-dom";
+import { AllNav } from "../../navigation/NavConfig";
+
+const AdminSideBar = ({ isSidebarOpen, setIsSiderbarOpen }) => {
   const { userInfo } = useSelector((state) => state.auth);
   const allNavs = AllNav.filter((nav) => nav.role === userInfo?.role);
   console.log("allnavs :", allNavs);
@@ -42,4 +43,4 @@ const SideBar = ({ isSidebarOpen, setIsSiderbarOpen }) => {
   );
 };
 
-export default SideBar;
+export default AdminSideBar;

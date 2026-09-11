@@ -1,4 +1,5 @@
 import { lazy } from "react";
+
 const AdminDashboard = lazy(() => import("../../views/admin/AdminDashboard"));
 const AdminOrders = lazy(() => import("../../views/admin/AdminOrders"));
 const AdminCategory = lazy(() => import("../../views/admin/AdminCategory"));
@@ -7,6 +8,7 @@ const PaymentRequest = lazy(() => import("../../views/admin/PaymentRequest"));
 const DeactivateSeller = lazy(
   () => import("../../views/admin/DeactivateSeller"),
 );
+const OrderDetail = lazy(() => import("../../views/admin/OrderDetail"));
 const SellerRequest = lazy(() => import("../../views/admin/SellerRequest"));
 const SellerDetail = lazy(() => import("../../views/admin/SellerDetail"));
 const SellerChat = lazy(() => import("../../views/admin/SellerChat"));
@@ -21,6 +23,7 @@ const AdminRoutes = [
   { path: "/admin/seller_request", element: <SellerRequest /> },
   { path: "/admin/seller_detail/:seller_ID", element: <SellerDetail /> },
   { path: "/admin/seller_chat", element: <SellerChat /> },
+  { path: "/admin/order/detail/:order_ID", element: <OrderDetail /> },
 ];
 
 export default AdminRoutes;

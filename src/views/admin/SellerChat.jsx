@@ -28,7 +28,7 @@ const SellerChat = () => {
   const handleSellerSelect = (seller) => {
     setSelectedSeller(seller);
 
-    if (window.innerWidth < 1024) {
+    if (window.innerWidth < 1280) {
       setShowSellerList(false);
       setShowSellerInfo(false);
     }
@@ -63,7 +63,7 @@ const SellerChat = () => {
       <div className="flex h-[calc(100vh-110px)] min-h-[600px] border-2 border-slate-200 rounded-md">
         {/* right side  */}
         <aside
-          className={`${showSellerList ? "flex flex-col" : "hidden"} border-r border-slate-200 w-full lg:flex lg:w-[310px] xl:w-[340px] shrink-0 `}
+          className={`${showSellerList ? "flex flex-col" : "hidden"} border-r border-slate-200 w-full lg:flex lg:w-[330px] xl:w-[340px] shrink-0 `}
         >
           {/* header start  */}
           <div className="flex flex-col gap-3 p-4 sticky">

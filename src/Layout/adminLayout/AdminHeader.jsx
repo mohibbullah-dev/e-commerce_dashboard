@@ -4,13 +4,13 @@ import { CgProfile } from "react-icons/cg";
 import { CiSettings } from "react-icons/ci";
 import { IoMdLogOut } from "react-icons/io";
 
-import profile_placeholder from "../assets/profile_placeholder.png";
+import profile_placeholder from "../../assets/profile_placeholder.png";
 import { useState } from "react";
-const Header = ({ isSidebarOpen, setIsSiderbarOpen }) => {
+const AdminHeader = ({ isSidebarOpen, setIsSiderbarOpen }) => {
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
   return (
-    <div className="sticky top-0 z-50">
+    <div className="sticky top-0 z-40">
       <div className="flex justify-between items-center bg-gray-500 h-[80px] m-2 rounded-md">
         <div className="flex items-center">
           <CgMenuOreos
@@ -72,4 +72,4 @@ const Header = ({ isSidebarOpen, setIsSiderbarOpen }) => {
   );
 };
 
-export default Header;
+export default AdminHeader;

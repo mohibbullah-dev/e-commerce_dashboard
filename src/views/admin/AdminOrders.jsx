@@ -54,7 +54,7 @@ const AdminOrders = () => {
               <div className="py-3 w-[18%] font-medium">Pending</div>
               <div className="py-3 w-[18%] font-medium">Pending</div>
               <div className="py-3 w-[18%] font-medium">
-                <Link>View</Link>
+                <Link to="/admin/order/detail/2">View</Link>
               </div>
               <div
                 onClick={() => setSub_order_show(!sub_order_show)}
@@ -119,8 +119,8 @@ const AdminOrders = () => {
                 <div className="py-3 w-[13%] font-medium">$654</div>
                 <div className="py-3 w-[18%] font-medium">Pending</div>
                 <div className="py-3 w-[18%] font-medium">Pending</div>
-                <div className="py-3 w-[18%] font-medium">
-                  <Link>View</Link>
+                <div className="py-3 w-[18%] font-medium cursor-pointer">
+                  <Link to="/admin/order/detail/2">hello</Link>
                 </div>
                 <div className="py-3 w-[8%] font-medium cursor-pointer">
                   {sub_order_show ? <IoIosArrowDown /> : <IoIosArrowUp />}

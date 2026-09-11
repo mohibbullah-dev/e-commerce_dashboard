@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import SideBar from "./SideBar";
-import Header from "./Header";
 
-const MainLayout = () => {
+import AdminSideBar from "./AdminSideBar";
+import AdminHeader from "./AdminHeader";
+
+const AdminLayout = () => {
   const [isSidebarOpen, setIsSiderbarOpen] = useState(true);
   console.log("isSidebarOpen", isSidebarOpen);
   return (
@@ -15,13 +16,13 @@ const MainLayout = () => {
         ></div>
       )}
       <div>
-        <SideBar
+        <AdminSideBar
           isSidebarOpen={isSidebarOpen}
           setIsSiderbarOpen={setIsSiderbarOpen}
         />
       </div>
       <div className=" w-full md:w-[calc(100% - 260px)] md:ml-[260px] lg:flex-1 flex-col justify-between items-center h-screen">
-        <Header
+        <AdminHeader
           isSidebarOpen={isSidebarOpen}
           setIsSiderbarOpen={setIsSiderbarOpen}
         />
@@ -31,4 +32,4 @@ const MainLayout = () => {
   );
 };
 
-export default MainLayout;
+export default AdminLayout;

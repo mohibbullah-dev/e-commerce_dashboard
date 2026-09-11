@@ -15,7 +15,7 @@ const Paginations = ({
   useEffect(() => {
     const resizeHandler = () => {
       if (window.innerWidth < 640) {
-        setWindowSize(5);
+        setWindowSize(4);
       } else {
         setWindowSize(7);
       }

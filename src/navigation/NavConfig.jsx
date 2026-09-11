@@ -37,13 +37,7 @@ export const AllNav = [
     icon: <MdSpaceDashboard />,
     role: "admin",
   },
-  {
-    id: 5,
-    title: "All sellers",
-    path: "/admin/serllers",
-    icon: <IoMdPeople />,
-    role: "admin",
-  },
+
   {
     id: 6,
     title: "Payment Request",

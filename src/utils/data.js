@@ -771,3 +771,16 @@ export const recentOrders = [
     status: "Delivered",
   },
 ];
+
+export const defaultCategories = [
+  { id: 1, name: "mobile" },
+  { id: 2, name: "latop" },
+  { id: 3, name: "car" },
+  { id: 4, name: "headphon" },
+  { id: 5, name: "bag" },
+  { id: 6, name: "books" },
+  { id: 7, name: "mice" },
+  { id: 8, name: "cycle" },
+  { id: 9, name: "electricity" },
+  { id: 5, name: "yearphon" },
+];

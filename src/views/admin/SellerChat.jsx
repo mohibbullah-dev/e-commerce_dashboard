@@ -127,7 +127,7 @@ const SellerChat = () => {
             <div className=" flex items-center justify-center space-x-4">
               <button
                 onClick={() => setShowSellerList(true)}
-                className="lg:flex text-slate-500 rounded-3xl hover:bg-slate-100 cursor-pointer p-2"
+                className="flex lg:hidden text-slate-500 rounded-3xl hover:bg-slate-100 cursor-pointer p-2"
               >
                 <BiArrowBack size={19} className="" />
               </button>

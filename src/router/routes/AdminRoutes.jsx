@@ -14,16 +14,16 @@ const SellerDetail = lazy(() => import("../../views/admin/SellerDetail"));
 const SellerChat = lazy(() => import("../../views/admin/SellerChat"));
 
 const AdminRoutes = [
-  { path: "/admin/dashboard", element: <AdminDashboard /> },
-  { path: "/admin/orders", element: <AdminOrders /> },
-  { path: "/admin/category", element: <AdminCategory /> },
-  { path: "/admin/seller", element: <AdminSeller /> },
-  { path: "/admin/payment_request", element: <PaymentRequest /> },
-  { path: "/admin/deactive_seller", element: <DeactivateSeller /> },
-  { path: "/admin/seller_request", element: <SellerRequest /> },
-  { path: "/admin/seller_detail/:seller_ID", element: <SellerDetail /> },
-  { path: "/admin/seller_chat", element: <SellerChat /> },
-  { path: "/admin/order/detail/:order_ID", element: <OrderDetail /> },
+  { path: "dashboard", element: <AdminDashboard /> },
+  { path: "orders", element: <AdminOrders /> },
+  { path: "category", element: <AdminCategory /> },
+  { path: "seller", element: <AdminSeller /> },
+  { path: "payment_request", element: <PaymentRequest /> },
+  { path: "deactive_seller", element: <DeactivateSeller /> },
+  { path: "seller_request", element: <SellerRequest /> },
+  { path: "seller_detail/:seller_ID", element: <SellerDetail /> },
+  { path: "seller_chat", element: <SellerChat /> },
+  { path: "order/detail/:order_ID", element: <OrderDetail /> },
 ];
 
 export default AdminRoutes;

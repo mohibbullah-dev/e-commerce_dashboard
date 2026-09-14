@@ -15,10 +15,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <AdminLayout />,
+    element: <ProtectRoute allowedRoles={"admin"} />,
     children: [
       {
-        element: <ProtectRoute allowedRoles={"admin"} />,
+        element: <AdminLayout allowedRoles={"admin"} />,
         children: AdminRoutes,
       },
     ],
@@ -26,10 +26,10 @@ const router = createBrowserRouter([
 
   {
     path: "/seller",
-    element: <SellerLayout />,
+    element: <ProtectRoute allowedRoles={"seller"} />,
     children: [
       {
-        element: <ProtectRoute allowedRoles={"seller"} />,
+        element: <SellerLayout allowedRoles={"seller"} />,
         children: SellerRoutes,
       },
     ],

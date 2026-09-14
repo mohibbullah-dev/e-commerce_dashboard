@@ -4,6 +4,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectRoute = ({ allowedRoles }) => {
   const { userInfo } = useSelector((state) => state.auth);
+  console.log("userInfo:", userInfo);
   if (!userInfo) {
     if (allowedRoles.includes("admin")) {
       return <Navigate to="/admin/login" replace />;

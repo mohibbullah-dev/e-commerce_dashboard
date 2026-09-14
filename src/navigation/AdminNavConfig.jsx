@@ -7,8 +7,7 @@ import { IoMdPersonAdd } from "react-icons/io";
 import { FaCodePullRequest } from "react-icons/fa6";
 import { IoMdChatboxes } from "react-icons/io";
 import { IoMdLogOut } from "react-icons/io";
-export const AllNav = [
-  // admin menu
+export const AdminAllNav = [
   {
     id: 1,
     title: "Dashboard",

@@ -7,6 +7,9 @@ import { IoMdPersonAdd } from "react-icons/io";
 import { FaCodePullRequest } from "react-icons/fa6";
 import { IoMdChatboxes } from "react-icons/io";
 import { IoMdLogOut } from "react-icons/io";
+import { TiMessages } from "react-icons/ti";
+import { BiSupport } from "react-icons/bi";
+
 export const AdminAllNav = [
   {
     id: 1,
@@ -58,9 +61,17 @@ export const AdminAllNav = [
     icon: <FaCodePullRequest />,
     role: "admin",
   },
+
   {
     id: 9,
-    title: "Live Chat",
+    title: "Customer Support",
+    path: "/admin/customer_chat",
+    icon: <BiSupport />,
+    role: "admin",
+  },
+  {
+    id: 9,
+    title: "Seller Support",
     path: "/admin/seller_chat",
     icon: <IoMdChatboxes />,
     role: "admin",

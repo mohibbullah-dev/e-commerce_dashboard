@@ -53,7 +53,7 @@ const Orders = () => {
               <div className="py-3 w-[18%] font-medium">Pending</div>
               <div className="py-3 w-[18%] font-medium">Pending</div>
               <div className="py-3 w-[18%] font-medium">
-                <Link to="/admin/order/detail/2">View</Link>
+                <Link to="orderDetail/4">View</Link>
               </div>
             </div>
 
@@ -69,7 +69,7 @@ const Orders = () => {
                 <div className="py-3 w-[18%] font-medium">Pending</div>
                 <div className="py-3 w-[18%] font-medium">Pending</div>
                 <div className="py-3 w-[18%] font-medium">
-                  <Link>View</Link>
+                  <Link to="orderDetail/4">View</Link>
                 </div>
                 <div className="py-3 w-[8%] font-medium cursor-pointer">
                   {sub_order_show ? <IoIosArrowDown /> : <IoIosArrowUp />}
@@ -89,7 +89,7 @@ const Orders = () => {
               <div className="py-3 w-[18%] font-medium">Pending</div>
               <div className="py-3 w-[18%] font-medium">Pending</div>
               <div className="py-3 w-[18%] font-medium">
-                <Link>View</Link>
+                <Link to="orderDetail/4">View</Link>
               </div>
             </div>
 

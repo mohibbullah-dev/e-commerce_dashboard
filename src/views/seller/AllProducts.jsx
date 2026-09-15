@@ -8,6 +8,7 @@ import CategoryModel from "../components/CategoryModel";
 import { AiFillCloseSquare } from "react-icons/ai";
 import { BiEdit } from "react-icons/bi";
 import { BsEye } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const AllProducts = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -136,14 +137,17 @@ const AllProducts = () => {
                       scope="row"
                       className="py-3 px-4 flex items-center justify-start  gap-3 font-medium whitespace-nowrap"
                     >
-                      <BiEdit
-                        color="black"
-                        className="bg-gray-300 hover:bg-yellow-200 cursor-pointer rounded-md p-1 flex items-center justify-center w-[20px] h-[20px]"
-                      />
+                      <Link to="editProduct/2">
+                        <BiEdit
+                          color="black"
+                          className="bg-gray-300 hover:bg-yellow-200 cursor-pointer rounded-md p-1 flex items-center justify-center w-[20px] h-[20px]"
+                        />
+                      </Link>
                       <BsEye
                         color="black"
                         className="bg-gray-300 hover:bg-emerald-500 cursor-pointer rounded-md p-1 flex items-center justify-center w-[20px] h-[20px]"
                       />
+
                       <MdDelete
                         color="black"
                         className="bg-gray-300 hover:bg-red-500 cursor-pointer rounded-md p-1 flex items-center justify-center w-[20px] h-[20px]"

@@ -10,6 +10,7 @@ import { IoMdChatboxes } from "react-icons/io";
 import { IoMdLogOut } from "react-icons/io";
 import { RiDiscountPercentLine } from "react-icons/ri";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
+import { BiSupport } from "react-icons/bi";
 export const SellerAllNav = [
   {
     id: 1,
@@ -54,6 +55,27 @@ export const SellerAllNav = [
     title: "Payments",
     path: "/seller/payments",
     icon: <MdOutlinePayment />,
+    role: "seller",
+  },
+  {
+    id: 7,
+    title: "Chat Support",
+    path: "/seller/chatTosupport",
+    icon: <BiSupport />,
+    role: "seller",
+  },
+  {
+    id: 7,
+    title: "SellerToCustomer",
+    path: "/seller/chatToCustomer",
+    icon: <IoMdChatboxes />,
+    role: "seller",
+  },
+  {
+    id: 7,
+    title: "Profile",
+    path: "/seller/profile",
+    icon: <IoMdChatboxes />,
     role: "seller",
   },
 ];

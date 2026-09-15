@@ -12,6 +12,7 @@ const OrderDetail = lazy(() => import("../../views/admin/OrderDetail"));
 const SellerRequest = lazy(() => import("../../views/admin/SellerRequest"));
 const SellerDetail = lazy(() => import("../../views/admin/SellerDetail"));
 const SellerChat = lazy(() => import("../../views/admin/SellerChat"));
+const CustomerChat = lazy(() => import("../../views/admin/CustomerChat"));
 
 const AdminRoutes = [
   { path: "dashboard", element: <AdminDashboard /> },
@@ -22,6 +23,7 @@ const AdminRoutes = [
   { path: "deactive_seller", element: <DeactivateSeller /> },
   { path: "seller_request", element: <SellerRequest /> },
   { path: "seller_detail/:seller_ID", element: <SellerDetail /> },
+  { path: "customer_chat", element: <CustomerChat /> },
   { path: "seller_chat", element: <SellerChat /> },
   { path: "order/detail/:order_ID", element: <OrderDetail /> },
 ];

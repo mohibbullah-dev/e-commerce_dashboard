@@ -4,6 +4,7 @@ import { messageClear, seller_login } from "../../store/reducers/authSlice";
 import toast from "react-hot-toast";
 import { BeatLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SellerLogin = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const SellerLogin = () => {
     if (errorMessage) {
       toast.error(errorMessage);
       dispatch(messageClear());
+      return;
     }
     if (successMessage) {
       toast.success(successMessage);
@@ -92,6 +94,18 @@ const SellerLogin = () => {
                 "Log In"
               )}
             </button>
+
+            <div className="flex items-center mb-3 gap-3 justify-center">
+              <p>
+                Don't have a account ?
+                <Link
+                  className="font-bold ml-1 hover:underline hover:text-blue-400"
+                  to="/seller/register"
+                >
+                  Sign Up
+                </Link>
+              </p>
+            </div>
           </form>
         </div>
       </div>

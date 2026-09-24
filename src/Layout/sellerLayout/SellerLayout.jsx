@@ -6,7 +6,6 @@ import SellerSidebar from "./SellerSidebar";
 
 const SellerLayout = () => {
   const [isSidebarOpen, setIsSiderbarOpen] = useState(true);
-  console.log("isSidebarOpen", isSidebarOpen);
   return (
     <div className="flex justify-between">
       {isSidebarOpen && (

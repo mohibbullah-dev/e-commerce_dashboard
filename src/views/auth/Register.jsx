@@ -1,12 +1,25 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { messageClear, user_register } from "../../store/reducers/authSlice";
+import toast from "react-hot-toast";
+import { BeatLoader } from "react-spinners";
 const Register = () => {
   const [state, setState] = useState({
     name: "",
     email: "",
     password: "",
   });
+  const [agreed, setAgreed] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const { userInfo } = useSelector((state) => state.auth); atao use kora jai
+
+  const userInfo = useSelector((state) => state.auth.userInfo);
+  const errorMessage = useSelector((state) => state.auth.errorMessage);
+  const successMessage = useSelector((state) => state.auth.successMessage);
+  const loader = useSelector((state) => state.auth.loader);
 
   const inpurHandler = (e) => {
     setState({
@@ -17,8 +30,22 @@ const Register = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
-    console.log(state);
+    dispatch(user_register(state));
   };
+
+  useEffect(() => {
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+      return;
+    }
+
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      // navigate("/");
+    }
+  }, [errorMessage, successMessage, dispatch, navigate]);
 
   return (
     <div className="min-w-screen min-h-screen bg-[#cdcae9] flex justify-center items-center">
@@ -79,14 +106,28 @@ const Register = () => {
                 type="checkbox"
                 name="checkbox"
                 id="checkbox"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
               />
               <label htmlFor="checkbox">
                 {" "}
                 I agree to privacy policy & terms
               </label>
             </div>
-            <button className="bg-slate-800 w-full hover:shadow-blue-300/ hover:shadow-lg text-white rounded-md px-7 py-2 mb-3 cursor-pointer">
-              Sign up
+
+            <button
+              disabled={agreed || loader ? false : true}
+              className={`bg-slate-800 ${agreed ? "cursor-pointer opacity-100" : "cursor-not-allowed opacity-60"} w-full hover:shadow-blue-300/ hover:shadow-lg text-white rounded-md px-7 py-2 mb-3 `}
+            >
+              {loader ? (
+                <BeatLoader
+                  color="#fff"
+                  size={"8px"}
+                  cssOverride={{ textAlign: "center" }}
+                />
+              ) : (
+                "Register"
+              )}
             </button>
             <div className="flex items-center mb-3 gap-3 justify-center">
               <p>
@@ -95,7 +136,7 @@ const Register = () => {
                   className="font-bold ml-1 hover:underline hover:text-blue-400"
                   to="/login"
                 >
-                  Sing In
+                  LogIn
                 </Link>
               </p>
             </div>

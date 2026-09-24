@@ -2,31 +2,24 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { messageClear, user_login } from "../../store/reducers/authSlice";
+import { messageClear, seller_register } from "../../store/reducers/authSlice";
+import { BeatLoader } from "react-spinners";
 import toast from "react-hot-toast";
-const Login = () => {
+const SellerRegister = () => {
   const [state, setState] = useState({
+    name: "",
     email: "",
     password: "",
   });
 
+  const [agreed, setAgreed] = useState(false);
   const dispatch = useDispatch();
-  const { userInfo, errorMessage, successMessage } = useSelector(
+  const navigate = useNavigate();
+  const { loader, errorMessage, successMessage, userInfo } = useSelector(
     (state) => state.auth,
   );
-  const navigate = useNavigate();
 
-  const inputHandler = (e) => {
-    setState({
-      ...state,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const formSubmit = (e) => {
-    e.preventDefault();
-    dispatch(user_login(state));
-  };
+  console.log("message :", { errorMessage, successMessage });
 
   useEffect(() => {
     if (errorMessage) {
@@ -34,13 +27,24 @@ const Login = () => {
       dispatch(messageClear());
       return;
     }
-
     if (successMessage) {
       toast.success(successMessage);
       dispatch(messageClear());
-      navigate("/");
+      // navigate("/seller/dashboard");
     }
-  }, [errorMessage, successMessage, dispatch, navigate]);
+  }, [errorMessage, successMessage, navigate, dispatch]);
+
+  const inpurHandler = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    dispatch(seller_register(state));
+  };
 
   return (
     <div className="min-w-screen min-h-screen bg-[#cdcae9] flex justify-center items-center">
@@ -49,15 +53,29 @@ const Login = () => {
           <h2 className="text-xl mb-3 font-bold">Welcome to E-commerce</h2>
           <p className="text-sm mb-3 font-medium">
             {" "}
-            Please Sign In your account
+            Please register your account as a Seller
           </p>
 
-          <form onSubmit={formSubmit}>
+          <form onSubmit={submitForm}>
+            <div className="flex flex-col w-full gap-1 mb-3">
+              <label htmlFor="name">name</label>
+              <input
+                className="px-3 py-2 outline-none border border-slate-700 bg-transparent rounded-md"
+                onChange={inpurHandler}
+                value={state.name}
+                type="text"
+                name="name"
+                id=""
+                placeholder="name"
+                required
+              />
+            </div>
+
             <div className="flex flex-col w-full gap-1 mb-3">
               <label htmlFor="email">email</label>
               <input
                 className="px-3 py-2 outline-none border border-slate-700 bg-transparent rounded-md"
-                onChange={inputHandler}
+                onChange={inpurHandler}
                 value={state.email}
                 type="email"
                 name="email"
@@ -71,7 +89,7 @@ const Login = () => {
               <label htmlFor="password">password</label>
               <input
                 className="px-3 py-2 outline-none border border-slate-700/50 bg-transparent rounded-md"
-                onChange={inputHandler}
+                onChange={inpurHandler}
                 value={state.password}
                 type="password"
                 name="password"
@@ -81,17 +99,44 @@ const Login = () => {
               />
             </div>
 
-            <button className="bg-slate-800 w-full hover:shadow-blue-300/ hover:shadow-lg text-white rounded-md px-7 py-2 mb-3 cursor-pointer">
-              Login up
+            <div className="flex items-center w-full gap-3 mb-3">
+              <input
+                className="w-4 h-4 text-blue-600 overflow-hidden border-gray-200 rounded border-gray-300 focus:ring-blue-500"
+                type="checkbox"
+                name="checkbox"
+                checked={agreed}
+                onChange={(e) => {
+                  setAgreed(e.target.checked);
+                }}
+                id="checkbox"
+              />
+              <label htmlFor="checkbox">
+                {" "}
+                I agree to privacy policy & terms
+              </label>
+            </div>
+            <button
+              disabled={agreed || loader ? false : true}
+              className={`bg-slate-800 ${agreed ? "cursor-pointer opacity-100" : "cursor-not-allowed opacity-60"} w-full hover:shadow-blue-300/ hover:shadow-lg text-white rounded-md px-7 py-2 mb-3 `}
+            >
+              {loader ? (
+                <BeatLoader
+                  color="#fff"
+                  size={"8px"}
+                  cssOverride={{ textAlign: "center" }}
+                />
+              ) : (
+                "Register"
+              )}
             </button>
             <div className="flex items-center mb-3 gap-3 justify-center">
               <p>
-                Don't have a account ?
+                Already Have an account ?
                 <Link
                   className="font-bold ml-1 hover:underline hover:text-blue-400"
-                  to="/register"
+                  to="/seller/login"
                 >
-                  Sign Up
+                  LogIn
                 </Link>
               </p>
             </div>
@@ -124,4 +169,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SellerRegister;

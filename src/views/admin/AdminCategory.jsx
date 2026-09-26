@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import profile_placeholder from "../../assets/profile_placeholder.png";
 import Paginations from "../components/Paginations";
 import { BiEditAlt, BiSolidEdit } from "react-icons/bi";
@@ -7,16 +7,59 @@ import { FaRegImages } from "react-icons/fa";
 import CategoryModel from "../components/CategoryModel";
 import { AiFillCloseSquare } from "react-icons/ai";
 import Draggable from "react-draggable";
+import { useDispatch, useSelector } from "react-redux";
+import { add_category } from "../../store/reducers/categorySlice";
+import toast from "react-hot-toast";
+import { messageClear } from "../../store/reducers/categorySlice";
+
+// take valu from input fields
+// validate the value
+// send the date to reduct_store using dispatch
+// call frontend api using 'creatAdyncThunk'
+// check the response data in 'console.log'
+// return the responso data
+// create extraReducer methods
+// asign the data to variable
+// get data from render component using useSelector hook
+// assign value in apprepreate place
 
 const AdminCategory = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const windowSize = 7;
-  const totalItems = 2000;
-  const itemPerPage = 10;
   const [showCatModel, setShowCatModel] = useState(false);
   const nodeRef = useRef(null);
+  const windowSize = 7;
 
-  const inputHandler = () => {};
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const [perPage, setParPage] = useState(0);
+  const [categoryName, setCategoryName] = useState("");
+  const [categoryImage, setCategoryImage] = useState(null);
+  const dispatch = useDispatch();
+  const { loader, errorMessage, successMessage } = useSelector(
+    (state) => state.category,
+  );
+
+  const submitHandler = () => {
+    const formData = new FormData();
+    formData.append("cat_name", categoryName);
+    formData.append("cat_image", categoryImage);
+    // console.log(formData.get("catName")); // to see formdata value;
+    dispatch(add_category(formData));
+  };
+
+  useEffect(() => {
+    if (errorMessage) {
+      toast.error(errorMessage);
+      dispatch(messageClear());
+    }
+    if (successMessage) {
+      toast.success(successMessage);
+      dispatch(messageClear());
+      setCategoryName("");
+      setCategoryImage(null);
+    }
+  }, [dispatch, errorMessage, successMessage]);
+
+  const totalItems = 2000;
 
   return (
     <div className="p-0 lg:p-2 m-1 lg:m-2 bg-gray-100 flex  flex-col inset-0 rounded-sm">
@@ -122,7 +165,7 @@ const AdminCategory = () => {
                 onPageChange={setCurrentPage}
                 windowSize={windowSize}
                 totalItems={totalItems}
-                itemPerPage={itemPerPage}
+                itemPerPage={setParPage}
               />
             </div>
           </Draggable>
@@ -130,7 +173,14 @@ const AdminCategory = () => {
 
         {/* right pannel  */}
         <div className="hidden lg:block w-5/12">
-          <CategoryModel />
+          <CategoryModel
+            setCategoryName={setCategoryName}
+            categoryName={categoryName}
+            setCategoryImage={setCategoryImage}
+            categoryImage={categoryImage}
+            submitHandler={submitHandler}
+            loader={loader}
+          />
         </div>
         {showCatModel && (
           <div

@@ -8,9 +8,10 @@ const Paginations = ({
   totalItems,
   itemPerPage,
   onPageChange,
+  hasNextPage,
+  hasPrevPage,
+  totalPage,
 }) => {
-  const totalPages = Math.ceil(totalItems / itemPerPage);
-
   const [windowSize, setWindowSize] = useState(7);
   useEffect(() => {
     const resizeHandler = () => {
@@ -26,7 +27,7 @@ const Paginations = ({
     return () => window.removeEventListener("resize", resizeHandler);
   }, []);
 
-  if (totalPages <= 1) return null;
+  if (totalPage <= 1) return null;
 
   const baseBtn =
     "w-[35px] h-[35px] flex justify-center items-center rounded-md border transition-colors";
@@ -40,7 +41,7 @@ const Paginations = ({
     const half = Math.floor(windowSize / 3);
 
     let start = Math.max(1, currentPage - half);
-    const end = Math.min(totalPages, start + (windowSize - 1));
+    const end = Math.min(totalPage, start + (windowSize - 1));
     start = Math.max(1, end - windowSize + 1);
 
     const pages = [];
@@ -55,7 +56,7 @@ const Paginations = ({
     <div className="flex items-center justify-center gap-1 my-4">
       <button
         onClick={() => onPageChange(1)}
-        disabled={totalPages === 1}
+        disabled={totalPage === 1}
         className={`${baseBtn} ${currentPage === 1 ? disableBtn : normalBtn}`}
       >
         <RiArrowLeftDoubleFill />
@@ -63,13 +64,13 @@ const Paginations = ({
 
       <button
         onClick={() => onPageChange(currentPage - 1)}
-        disabled={totalPages === 1}
+        disabled={totalPage === 1}
         className={`${baseBtn} ${currentPage === 1 ? disableBtn : normalBtn}`}
       >
         <RiArrowDropLeftLine />
       </button>
 
-      {visiblePages[0] > 1 && (
+      {hasNextPage && (
         <span className="text-[#d0d2d6] px-1 select-none">...</span>
       )}
       {visiblePages.map((page, i) => (
@@ -82,20 +83,20 @@ const Paginations = ({
         </button>
       ))}
 
-      {totalPages > visiblePages[visiblePages.length - 1] && (
+      {hasPrevPage && (
         <span className="text-[#d0d2d6] px-1 select-none">...</span>
       )}
 
       <button
         onClick={() => onPageChange(currentPage + 1)}
-        className={`${baseBtn} ${currentPage === totalPages ? disableBtn : normalBtn} px-2 py-1 `}
+        className={`${baseBtn} ${currentPage === totalPage ? disableBtn : normalBtn} px-2 py-1 `}
       >
         <RiArrowDropRightLine />
       </button>
 
       <button
-        onClick={() => onPageChange(totalPages)}
-        className={`${baseBtn} ${currentPage === totalPages ? disableBtn : normalBtn} px-2 py-1 `}
+        onClick={() => onPageChange(totalPage)}
+        className={`${baseBtn} ${currentPage === totalPage ? disableBtn : normalBtn} px-2 py-1 `}
       >
         <RiArrowRightDoubleLine />
       </button>

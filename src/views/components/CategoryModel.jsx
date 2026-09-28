@@ -84,7 +84,7 @@ const CategoryModel = ({
 
       <div onClick={submitHandler}>
         <button
-          disabled={loader ? true : false}
+          disabled={!categoryName || !categoryImage ? true : false}
           className={` ${categoryImage && categoryName ? "opacity-100 cursor-pointer" : "opacity-60 cursor-not-allowed"} bg-slate-800 w-full hover:shadow-blue-300/ hover:shadow-lg text-white rounded-md px-7 py-2 mb-3 `}
         >
           {loader ? (

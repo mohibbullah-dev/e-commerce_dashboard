@@ -13,6 +13,18 @@ export const add_category = createAsyncThunk(
     }
   },
 );
+export const get_categories = createAsyncThunk(
+  "/category/get-categories",
+  async (params, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get("/category/get-categories", { params });
+      // console.log("data :", data.data.pagination);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
 
 const categorySlice = createSlice({
   name: "category",
@@ -21,6 +33,7 @@ const categorySlice = createSlice({
     successMessage: "",
     loader: false,
     categoryList: [],
+    pagination: {},
   },
   reducers: {
     messageClear: (state) => {
@@ -42,6 +55,12 @@ const categorySlice = createSlice({
       .addCase(add_category.fulfilled, (state, action) => {
         state.successMessage = action.payload.message;
         state.loader = false;
+      })
+
+      // get categories
+      .addCase(get_categories.fulfilled, (state, actions) => {
+        state.categoryList = actions.payload?.data?.categoris;
+        state.pagination = actions.payload?.data.pagination;
       });
   },
 });

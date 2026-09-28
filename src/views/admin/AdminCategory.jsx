@@ -8,7 +8,10 @@ import CategoryModel from "../components/CategoryModel";
 import { AiFillCloseSquare } from "react-icons/ai";
 import Draggable from "react-draggable";
 import { useDispatch, useSelector } from "react-redux";
-import { add_category } from "../../store/reducers/categorySlice";
+import {
+  add_category,
+  get_categories,
+} from "../../store/reducers/categorySlice";
 import toast from "react-hot-toast";
 import { messageClear } from "../../store/reducers/categorySlice";
 
@@ -30,13 +33,17 @@ const AdminCategory = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [perPage, setParPage] = useState(0);
+  const [perPage, setParPage] = useState(5);
+  const [search, setSearch] = useState("");
+
   const [categoryName, setCategoryName] = useState("");
   const [categoryImage, setCategoryImage] = useState(null);
   const dispatch = useDispatch();
-  const { loader, errorMessage, successMessage } = useSelector(
-    (state) => state.category,
-  );
+  const { loader, errorMessage, successMessage, categoryList, pagination } =
+    useSelector((state) => state.category);
+
+  console.log("categoryList :", categoryList);
+  console.log("pagination :", pagination);
 
   const submitHandler = () => {
     const formData = new FormData();
@@ -45,6 +52,16 @@ const AdminCategory = () => {
     // console.log(formData.get("catName")); // to see formdata value;
     dispatch(add_category(formData));
   };
+
+  useEffect(() => {
+    const params = {
+      page: currentPage || undefined,
+      limit: perPage || undefined,
+      search: search || undefined,
+    };
+
+    dispatch(get_categories(params));
+  }, [errorMessage, successMessage, dispatch, search, perPage, currentPage]);
 
   useEffect(() => {
     if (errorMessage) {
@@ -76,8 +93,10 @@ const AdminCategory = () => {
               <option value="20">20</option>
             </select>
             <input
+              onChange={(e) => setSearch(e.target.value)}
               className="px-4 py-2 focus:border-green-600 outline-none bg-transparent border border-gray-400 rounded-md text-[#d0d2d6]"
               type="text"
+              value={search}
               placeholder="search"
             />
           </div>
@@ -113,45 +132,43 @@ const AdminCategory = () => {
               </thead>
 
               <tbody className="">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(
-                  (m, i) => (
-                    <tr key={i}>
-                      <td
-                        scope="row"
-                        className="py-4 px-6 font-medium whitespace-nowrap"
-                      >
-                        {i + 1}
-                      </td>
-                      <td
-                        scope="row"
-                        className=" rounded-md w-[40px] h-[40px] font-medium whitespace-nowrap"
-                      >
-                        <img
-                          className="object-contain rounded-md w-full h-full"
-                          src={profile_placeholder}
-                          alt="category logo"
-                        />
-                      </td>
-                      <td
-                        scope="row"
-                        className="py-4 px-6 font-medium whitespace-nowrap"
-                      >
-                        Pending
-                      </td>
-                      <td
-                        scope="row"
-                        className="py-4 px-6 flex items-center justify-start gap-3 font-medium whitespace-nowrap"
-                      >
-                        <span className="bg-gray-700 p-2 rounded-md text-gray-100 hover:text-emerald-500 cursor-pointer ">
-                          <BiEditAlt />
-                        </span>
-                        <span className="bg-gray-700 p-2 rounded-md text-gray-100 hover:text-red-600 cursor-pointer">
-                          <MdDelete />
-                        </span>
-                      </td>
-                    </tr>
-                  ),
-                )}
+                {categoryList.map((m, i) => (
+                  <tr key={i}>
+                    <td
+                      scope="row"
+                      className="py-4 px-6 font-medium whitespace-nowrap"
+                    >
+                      {i + 1}
+                    </td>
+                    <td
+                      scope="row"
+                      className=" rounded-md w-[40px] h-[40px] font-medium whitespace-nowrap"
+                    >
+                      <img
+                        className="object-contain rounded-md w-full h-full"
+                        src={profile_placeholder}
+                        alt="category logo"
+                      />
+                    </td>
+                    <td
+                      scope="row"
+                      className="py-4 px-6 font-medium whitespace-nowrap"
+                    >
+                      {m?.category_name || "category_name"}
+                    </td>
+                    <td
+                      scope="row"
+                      className="py-4 px-6 flex items-center justify-start gap-3 font-medium whitespace-nowrap"
+                    >
+                      <span className="bg-gray-700 p-2 rounded-md text-gray-100 hover:text-emerald-500 cursor-pointer ">
+                        <BiEditAlt />
+                      </span>
+                      <span className="bg-gray-700 p-2 rounded-md text-gray-100 hover:text-red-600 cursor-pointer">
+                        <MdDelete />
+                      </span>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
@@ -164,8 +181,11 @@ const AdminCategory = () => {
                 currentPage={currentPage}
                 onPageChange={setCurrentPage}
                 windowSize={windowSize}
-                totalItems={totalItems}
-                itemPerPage={setParPage}
+                totalItems={pagination?.totalItems}
+                itemPerPage={pagination?.itemPerPage}
+                hasNextPage={pagination?.hasNextPage}
+                hasPrevPage={pagination?.hasPrevPage}
+                totalPage={pagination?.totalPage}
               />
             </div>
           </Draggable>

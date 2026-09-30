@@ -12,7 +12,6 @@ import {
   add_category,
   delete_category,
   get_categories,
-  update_category,
 } from "../../store/reducers/categorySlice";
 import toast from "react-hot-toast";
 import { messageClear } from "../../store/reducers/categorySlice";
@@ -44,34 +43,15 @@ const AdminCategory = () => {
   const { loader, errorMessage, successMessage, categoryList, pagination } =
     useSelector((state) => state.category);
 
-  const [isEditing, setIsEdting] = useState(null);
-  const [previewImage, setPreviewImage] = useState(null);
-
-  useEffect(() => {
-    console.log("isEditing :", isEditing);
-    if (isEditing) {
-      setCategoryName(isEditing?.category_name);
-      setPreviewImage(isEditing?.image?.url);
-    } else {
-      setCategoryName("");
-      setCategoryImage(null);
-      setPreviewImage(null);
-    }
-  }, [isEditing]);
+  console.log("categoryList :", categoryList);
+  console.log("pagination :", pagination);
 
   const submitHandler = () => {
     const formData = new FormData();
     formData.append("cat_name", categoryName);
-
-    if (categoryImage) {
-      formData.append("cat_image", categoryImage);
-    }
-
-    if (isEditing) {
-      dispatch(update_category({ id: isEditing?._id, formData }));
-    } else {
-      dispatch(add_category(formData));
-    }
+    formData.append("cat_image", categoryImage);
+    // console.log(formData.get("catName")); // to see formdata value;
+    dispatch(add_category(formData));
   };
 
   useEffect(() => {
@@ -94,8 +74,6 @@ const AdminCategory = () => {
       dispatch(messageClear());
       setCategoryName("");
       setCategoryImage(null);
-      setPreviewImage(null);
-      setIsEdting(null);
     }
   }, [dispatch, errorMessage, successMessage]);
 
@@ -169,7 +147,7 @@ const AdminCategory = () => {
                     >
                       <img
                         className="object-contain rounded-md w-full h-full"
-                        src={m.image?.url}
+                        src={profile_placeholder}
                         alt="category logo"
                       />
                     </td>
@@ -183,13 +161,7 @@ const AdminCategory = () => {
                       scope="row"
                       className="py-4 px-6 flex items-center justify-start gap-3 font-medium whitespace-nowrap"
                     >
-                      <span
-                        onClick={() => {
-                          setIsEdting(m);
-                          setShowCatModel(true);
-                        }}
-                        className="bg-gray-700 p-2 rounded-md text-gray-100 hover:text-emerald-500 cursor-pointer "
-                      >
+                      <span className="bg-gray-700 p-2 rounded-md text-gray-100 hover:text-emerald-500 cursor-pointer ">
                         <BiEditAlt />
                       </span>
                       <span
@@ -224,7 +196,6 @@ const AdminCategory = () => {
         </div>
 
         {/* right pannel  */}
-
         <div className="hidden lg:block w-5/12">
           <CategoryModel
             setCategoryName={setCategoryName}
@@ -233,11 +204,6 @@ const AdminCategory = () => {
             categoryImage={categoryImage}
             submitHandler={submitHandler}
             loader={loader}
-            setIsEdting={setIsEdting}
-            isEditing={isEditing}
-            setPreviewImage={setPreviewImage}
-            previewImage={previewImage}
-            setShowCatModel={setShowCatModel}
           />
         </div>
         {showCatModel && (
@@ -257,19 +223,7 @@ const AdminCategory = () => {
               >
                 <AiFillCloseSquare size={20} color="white" />
               </button>
-              <CategoryModel
-                setCategoryName={setCategoryName}
-                categoryName={categoryName}
-                setCategoryImage={setCategoryImage}
-                categoryImage={categoryImage}
-                submitHandler={submitHandler}
-                loader={loader}
-                setIsEdting={setIsEdting}
-                isEditing={isEditing}
-                setPreviewImage={setPreviewImage}
-                previewImage={previewImage}
-                setShowCatModel={setShowCatModel}
-              />
+              <CategoryModel />
             </div>
           </div>
         )}
